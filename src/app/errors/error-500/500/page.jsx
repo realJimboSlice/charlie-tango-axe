@@ -1,4 +1,4 @@
-export default function Custom500() {
+export default function Error500() {
   return (
     <main>
       <h1>500 - Server-side error occurred</h1>

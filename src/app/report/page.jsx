@@ -57,7 +57,6 @@ export default async function ReportPage({ searchParams }) {
     );
   } catch (error) {
     console.error("Error in ReportPage:", error);
-    // Redirect to custom 500 page
     redirect("/errors/error-500/500");
     return null;
   }
