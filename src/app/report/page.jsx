@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const tags = [
   "wcag2a",
@@ -57,7 +56,12 @@ export default async function ReportPage({ searchParams }) {
     );
   } catch (error) {
     console.error("Error in ReportPage:", error);
-    redirect("/errors/error-500");
+    // Redirect to custom 500 page for server-side errors
+    if (error.message === "Failed to fetch data.") {
+      redirect("/errors/error-500");
+    } else {
+      notFound();
+    }
     return null;
   }
 }
