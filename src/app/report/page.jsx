@@ -5,7 +5,16 @@ export const revalidate = 1800;
 
 export async function getServerSideProps(context) {
   const params = new URLSearchParams(context.query);
-  const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
+  const tags = [
+    "wcag2a",
+    "wcag2aa",
+    "wcag2aaa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice",
+    "ACT",
+  ];
 
   tags.forEach((tag) => params.append("tags", tag));
 
