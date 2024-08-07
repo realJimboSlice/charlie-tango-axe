@@ -1,21 +1,17 @@
 import Image from "next/image";
 
-// Revalidate route every 30 minutes
-export const revalidate = 1800;
+const tags = [
+  "wcag2a",
+  "wcag2aa",
+  "wcag2aaa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa",
+  "best-practice",
+  "ACT",
+];
 
-export async function getServerSideProps(context) {
-  const params = new URLSearchParams(context.query);
-  const tags = [
-    "wcag2a",
-    "wcag2aa",
-    "wcag2aaa",
-    "wcag21a",
-    "wcag21aa",
-    "wcag22aa",
-    "best-practice",
-    "ACT",
-  ];
-
+async function fetchData(params) {
   tags.forEach((tag) => params.append("tags", tag));
 
   try {
@@ -25,28 +21,22 @@ export async function getServerSideProps(context) {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    const data = await response.json();
-    return { props: { data } };
+    return await response.json();
   } catch (error) {
     console.error("Failed to fetch data:", error);
-    return { props: { data: null, error: "Failed to fetch data." } };
+    return { error: "Failed to fetch data." };
   }
 }
 
-const ReportPage = ({ data, error }) => {
-  if (error) {
+export default async function ReportPage({ searchParams }) {
+  const params = new URLSearchParams(searchParams);
+  const data = await fetchData(params);
+
+  if (data.error) {
     return (
       <main>
         <h1>Error</h1>
-        <p>{error}</p>
-      </main>
-    );
-  }
-
-  if (!data) {
-    return (
-      <main>
-        <h1>Loading...</h1>
+        <p>{data.error}</p>
       </main>
     );
   }
@@ -63,6 +53,4 @@ const ReportPage = ({ data, error }) => {
       />
     </main>
   );
-};
-
-export default ReportPage;
+}
