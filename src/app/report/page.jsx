@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { notFound } from "next/navigation"; // For 404 errors
-import { redirect } from "next/navigation"; // For redirection
+import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const tags = [
   "wcag2a",
