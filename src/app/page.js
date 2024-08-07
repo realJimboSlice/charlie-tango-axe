@@ -12,7 +12,13 @@ export default function Home() {
           Learn whether or not a site is accessible for people with disabilities
           and compliant with legislation!
         </h2>
-        <div className={container}></div>
+        <div>
+          <form>
+            <label htmlFor="url">Enter a website URL:</label>
+            <input type="text" id="url" placeholder="https://" required />
+            <button>Check</button>
+          </form>
+        </div>
       </section>
     </main>
   );
