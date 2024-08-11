@@ -38,13 +38,20 @@ export default function ReportPage({ searchParams }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  console.log("Router query:", router.query);
+  console.log("SearchParams:", searchParams);
+
   useEffect(() => {
-    console.log("Initial searchParams:", searchParams);
+    // Check if searchParams is empty and wait until they are populated
+    if (!searchParams.url) {
+      console.error("URL parameter is missing");
+      return;
+    }
+
     async function loadReport() {
       const params = new URLSearchParams(searchParams);
 
-      // Log the searchParams to ensure it's correct
-      console.log("SearchParams:", searchParams);
+      console.log("SearchParams:", params.toString());
       const fetchedData = await fetchData(params);
 
       if (fetchedData.errorCode === 404) {
@@ -56,11 +63,16 @@ export default function ReportPage({ searchParams }) {
       }
       setLoading(false);
     }
+
     loadReport();
   }, [searchParams, router]);
 
   if (loading) {
     return <LoadingSpin />;
+  }
+
+  if (!data) {
+    return <p>No data available</p>;
   }
 
   return (
