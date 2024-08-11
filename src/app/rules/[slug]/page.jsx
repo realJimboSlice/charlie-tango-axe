@@ -5,10 +5,6 @@ export default function RuleDetailPage({ params }) {
   const { slug } = params;
   const rule = rules.find((r) => r.id === slug);
 
-  if (!rule) {
-    return notFound();
-  }
-
   return (
     <div>
       <h1>{rule.id}</h1>
