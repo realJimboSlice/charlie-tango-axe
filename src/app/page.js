@@ -19,10 +19,9 @@ export default function Home() {
         Find out if a website is <span>accessible</span> and{" "}
         <span>compliant</span>!
       </h1>
-      <p>Enter a website URL to get started.</p>
+      <p>Enter a website URL to get started:</p>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="url">Enter a website URL:</label>
           <input
             type="text"
             id="url"

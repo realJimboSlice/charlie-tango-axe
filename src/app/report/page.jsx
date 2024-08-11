@@ -1,16 +1,8 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
-const tags = [
-  "wcag2a",
-  "wcag2aa",
-  "wcag2aaa",
-  "wcag21a",
-  "wcag21aa",
-  "wcag22aa",
-  "best-practice",
-  "ACT",
-];
+const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
 
 async function fetchData(params) {
   tags.forEach((tag) => params.append("tags", tag));
@@ -54,16 +46,47 @@ export default async function ReportPage({ searchParams }) {
 
   return (
     <main>
-      <h1>Report for {data.url}</h1>
-      <p>Tested for {data.passes.length + data.violations.length} AXE rules.</p>
-      <p>Found {data.violations.length} issues.</p>
-      <p>Tags: {data.passes.tags}</p>
-      <Image
-        alt={`Screenshot of ${data.url}`}
-        src={data.screenshot.url}
-        width={data.screenshot.width}
-        height={data.screenshot.height}
-      />
+      <div>
+        <div>
+          <Image
+            alt={`Screenshot of ${data.url}`}
+            src={data.screenshot.url}
+            width={data.screenshot.width}
+            height={data.screenshot.height}
+          />
+        </div>
+        <div>
+          <h1>Report for {data.url}</h1>
+          <p>
+            Tested for {data.passes.length + data.violations.length} AXE rules.
+          </p>
+          <p>
+            Found <span>{data.violations.length}</span> issues.
+          </p>
+        </div>
+        <article>
+          <h2>Violations</h2>
+          <p>Click on the rule id to be redirected to a more detailed page</p>
+          <ul>
+            {data.violations.map((violation) => (
+              <li key={violation.id}>
+                <p>
+                  Axe Rule Id:{" "}
+                  <Link href={`/rules/${violation.id}`}>
+                    <span>{violation.id}</span>
+                  </Link>
+                </p>
+                <p>
+                  Level of impact: <span>{violation.impact}</span>
+                </p>
+                <p>
+                  Description: <span>{violation.help}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
     </main>
   );
 }
