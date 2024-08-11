@@ -16,6 +16,19 @@
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-libre;
+}
+
+body {
+  @apply font-poppins;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
