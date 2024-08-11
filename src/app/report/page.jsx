@@ -12,6 +12,10 @@ async function fetchData(params) {
   console.log("Fetching data with params:", params.toString());
   tags.forEach((tag) => params.append("tags", tag));
 
+  // Log the full URL being fetched
+  const fullUrl = `https://mmd-a11y-api.vercel.app/api/scan?${params.toString()}`;
+  console.log("Full Fetch URL:", fullUrl);
+
   try {
     const response = await fetch(
       `https://mmd-a11y-api.vercel.app/api/scan?${params.toString()}`
