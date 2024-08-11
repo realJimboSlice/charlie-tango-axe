@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoadingSpin from "../../components/loadingSpin";
 import { useState, useEffect } from "react";
@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
 
 async function fetchData(params) {
+  // Log the params to see what's being passed
+  console.log("Fetching data with params:", params.toString());
   tags.forEach((tag) => params.append("tags", tag));
 
   try {
@@ -27,24 +29,18 @@ async function fetchData(params) {
   }
 }
 
-export default function ReportPage() {
-  const searchParams = useSearchParams();
+export default function ReportPage({ searchParams }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
+    console.log("Initial searchParams:", searchParams);
     async function loadReport() {
-      const url = searchParams.get("url");
-      console.log("URL:", url);
+      const params = new URLSearchParams(searchParams);
 
-      if (!url) {
-        // Handle case where URL is missing
-        console.error("URL parameter is missing");
-        return;
-      }
-
-      const params = new URLSearchParams({ url });
+      // Log the searchParams to ensure it's correct
+      console.log("SearchParams:", searchParams);
       const fetchedData = await fetchData(params);
 
       if (fetchedData.errorCode === 404) {
