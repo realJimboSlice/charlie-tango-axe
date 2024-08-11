@@ -35,6 +35,7 @@ export default function ReportPage({ searchParams }) {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("Initial searchParams:", searchParams);
     async function loadReport() {
       const params = new URLSearchParams(searchParams);
 

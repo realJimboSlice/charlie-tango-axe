@@ -9,6 +9,7 @@ export default function Home() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (url) {
+      console.log("Navigating to:", `/report?url=${encodeURIComponent(url)}`);
       router.push(`/report?url=${encodeURIComponent(url)}`);
     }
   };
