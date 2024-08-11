@@ -1,5 +1,5 @@
 import { Poppins, Libre_Baskerville } from "next/font/google";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import "./globals.css";
 
 const poppins = Poppins({
