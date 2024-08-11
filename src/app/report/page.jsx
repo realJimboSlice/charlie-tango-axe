@@ -38,6 +38,8 @@ export default async function ReportPage({ searchParams }) {
   const params = new URLSearchParams(searchParams);
   const data = await fetchData(params);
 
+  console.log("Fetched data:", data);
+
   if (data.errorCode === 404) {
     redirect("/errors/error-404"); // 404 Not Found
   }
@@ -53,7 +55,9 @@ export default async function ReportPage({ searchParams }) {
   return (
     <main>
       <h1>Report for {data.url}</h1>
-      <p>Found {data.violations.length} issues</p>
+      <p>Tested for {data.passes.length + data.violations.length} AXE rules.</p>
+      <p>Found {data.violations.length} issues.</p>
+      <p>Tags: {data.passes.tags}</p>
       <Image
         alt={`Screenshot of ${data.url}`}
         src={data.screenshot.url}
