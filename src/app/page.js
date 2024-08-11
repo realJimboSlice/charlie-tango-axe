@@ -25,6 +25,7 @@ export default function Home() {
       </p>
       <div className="w-full max-w-md">
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+          <label htmlFor="url" />
           <input
             type="text"
             id="url"
