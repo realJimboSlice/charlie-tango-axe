@@ -7,6 +7,23 @@ import { useState, useEffect } from "react";
 
 const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
 
+function calculateRating(passes, violations) {
+  const totalRules = passes + violations;
+  const violationRate = violations / totalRules;
+
+  if (violationRate === 0) return "A+";
+  if (violationRate <= 0.05) return "A";
+  if (violationRate <= 0.1) return "B+";
+  if (violationRate <= 0.15) return "B";
+  if (violationRate <= 0.2) return "C+";
+  if (violationRate <= 0.25) return "C";
+  if (violationRate <= 0.3) return "D+";
+  if (violationRate <= 0.35) return "D";
+  if (violationRate <= 0.4) return "E+";
+  if (violationRate <= 0.5) return "E";
+  return "F";
+}
+
 async function fetchData(params) {
   // Log the params to see what's being passed
   console.log("Fetching data with params:", params.toString());
@@ -75,6 +92,8 @@ export default function ReportPage({ searchParams }) {
     return <p>No data available</p>;
   }
 
+  const rating = calculateRating(data.passes.length, data.violations.length);
+
   return (
     <main className="bg-brand-beige-10 min-h-screen p-6">
       <div className="container mx-auto">
@@ -103,6 +122,12 @@ export default function ReportPage({ searchParams }) {
                 {data.violations.length}
               </span>{" "}
               issues.
+            </p>
+            <p className="text-lg text-grey-80">
+              Accessibility Rating:{" "}
+              <span className="font-bold text-brand-turquoise-50">
+                {rating}
+              </span>
             </p>
           </div>
         </div>

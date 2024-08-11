@@ -39,7 +39,7 @@ export default function RuleDetailPage({ params }) {
         <div className="mt-6">
           <Link
             href="/rules"
-            className="text-brand-turquoise-50 underline hover:text-brand-orange-70 transition-all duration-200"
+            className="text-grey-80 underline hover:text-brand-orange-70 transition-all duration-200"
           >
             Back to rule overview
           </Link>
