@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
 
 async function fetchData(params) {
+  // Log the params to see what's being passed
+  console.log("Fetching data with params:", params.toString());
   tags.forEach((tag) => params.append("tags", tag));
 
   try {
@@ -35,6 +37,9 @@ export default function ReportPage({ searchParams }) {
   useEffect(() => {
     async function loadReport() {
       const params = new URLSearchParams(searchParams);
+
+      // Log the searchParams to ensure it's correct
+      console.log("SearchParams:", searchParams);
       const fetchedData = await fetchData(params);
 
       if (fetchedData.errorCode === 404) {
