@@ -1,66 +1,22 @@
 "use client";
+import React, { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import LoadingSpin from "../../components/loadingSpin";
-import { useState, useEffect } from "react";
+import LoadingSpin from "../../components/LoadingSpin";
+import { fetchData, calculateRating } from "../../components/fetchReportData";
 
-const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
-
-function calculateRating(passes, violations) {
-  const totalRules = passes + violations;
-  const violationRate = violations / totalRules;
-
-  if (violationRate === 0) return "A+";
-  if (violationRate <= 0.05) return "A";
-  if (violationRate <= 0.1) return "B+";
-  if (violationRate <= 0.15) return "B";
-  if (violationRate <= 0.2) return "C+";
-  if (violationRate <= 0.25) return "C";
-  if (violationRate <= 0.3) return "D+";
-  if (violationRate <= 0.35) return "D";
-  if (violationRate <= 0.4) return "E+";
-  if (violationRate <= 0.5) return "E";
-  return "F";
-}
-
-async function fetchData(params) {
-  // Log the params to see what's being passed
-  console.log("Fetching data with params:", params.toString());
-  tags.forEach((tag) => params.append("tags", tag));
-
-  // Log the full URL being fetched
-  const fullUrl = `https://mmd-a11y-api.vercel.app/api/scan?${params.toString()}`;
-  console.log("Full Fetch URL:", fullUrl);
-
-  try {
-    const response = await fetch(
-      `https://mmd-a11y-api.vercel.app/api/scan?${params.toString()}`
-    );
-    if (!response.ok) {
-      if (response.status === 404) {
-        return { errorCode: 404 };
-      }
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-    return { errorCode: 500 };
-  }
-}
-
-export default function ReportPage({ searchParams }) {
+function ReportContent() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
-  console.log("Router query:", router.query);
-  console.log("SearchParams:", searchParams);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Check if searchParams is empty and wait until they are populated
-    if (!searchParams.url) {
+    // Gets the "url" parameter
+    const url = searchParams.get("url");
+
+    if (!url) {
       console.error("URL parameter is missing");
       return;
     }
@@ -161,5 +117,14 @@ export default function ReportPage({ searchParams }) {
         </article>
       </div>
     </main>
+  );
+}
+
+export default function ReportPage() {
+  return (
+    // Suspense shows a loading spinner while the data is being fetched
+    <Suspense fallback={<LoadingSpin />}>
+      <ReportContent />
+    </Suspense>
   );
 }
