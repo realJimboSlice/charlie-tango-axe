@@ -22,7 +22,7 @@ export default function Home() {
     if (pasteText.startsWith("http://") || pasteText.startsWith("https://")) {
       setUrl(pasteText); // Replace the entire value with the pasted URL
     } else {
-      setUrl("https://" + pasteText); // Prepend "https://" if no protocol is present
+      setUrl("https://" + pasteText);
     }
 
     // Move the cursor to the end of the input field
@@ -57,7 +57,7 @@ export default function Home() {
             value={url}
             ref={inputRef}
             onChange={handleChange}
-            onPaste={handlePaste} // Add paste event listener
+            onPaste={handlePaste}
             required
             className="p-3 border border-grey-40 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-turquoise-50 text-grey-100"
           />
