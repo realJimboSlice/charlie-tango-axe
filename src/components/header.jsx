@@ -13,7 +13,7 @@ export default function Header() {
           </li>
           <li>
             <Link href="/rules" className="hover:text-brand-orange-70 text-xl">
-              Rules Overview
+              Rule Overview
             </Link>
           </li>
         </ul>
