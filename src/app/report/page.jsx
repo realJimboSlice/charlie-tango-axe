@@ -56,7 +56,7 @@ function ReportContent() {
         <div className="flex flex-col md:flex-row gap-8">
           <div className="w-full md:w-1/2 flex-shrink-0">
             <Image
-              alt={`Screenshot of ${data.url}`}
+              alt={`Screenshot of the website: ${data.url}`}
               src={data.screenshot.url}
               width={data.screenshot.width}
               height={data.screenshot.height}

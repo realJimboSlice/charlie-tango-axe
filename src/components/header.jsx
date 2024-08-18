@@ -19,12 +19,14 @@ export default function Header() {
         </ul>
 
         <div>
-          <Image
-            alt="Diversa logo"
-            src="/assets/diversa.svg"
-            width={150}
-            height={150}
-          />
+          <Link href="/">
+            <Image
+              alt="Diversa logo"
+              src="/assets/diversa.svg"
+              width={150}
+              height={150}
+            />
+          </Link>
         </div>
       </nav>
     </header>
