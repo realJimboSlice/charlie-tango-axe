@@ -10,14 +10,14 @@ export default function RulesPage() {
         </h1>
         <ul className="space-y-4">
           {rules.map((rule) => (
-            <Link href={`/rules/${rule.id}`} key={rule.id}>
-              <li
-                key={rule.id}
-                className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200"
-              >
+            <li
+              key={rule.id}
+              className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
+            >
+              <Link href={`/rules/${rule.id}`} key={rule.id}>
                 <p className="text-grey-80">
                   Rule Id:{" "}
-                  <span className="text-brand-turquoise-50 underline font-bold">
+                  <span className="group-hover:text-brand-turquoise-50 underline font-bold">
                     {rule.id}
                   </span>
                 </p>
@@ -28,8 +28,8 @@ export default function RulesPage() {
                   Tags:{" "}
                   <span className="font-bold">{rule.tags.join(", ")}</span>
                 </p>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>
