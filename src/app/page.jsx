@@ -1,10 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Home() {
   const router = useRouter();
   const [url, setUrl] = useState("https://");
+  const inputRef = useRef(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,13 +15,25 @@ export default function Home() {
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault(); // Prevent the default paste behavior
+    const pasteText = e.clipboardData.getData("text");
+
+    if (pasteText.startsWith("http://") || pasteText.startsWith("https://")) {
+      setUrl(pasteText); // Replace the entire value with the pasted URL
+    } else {
+      setUrl("https://" + pasteText); // Prepend "https://" if no protocol is present
+    }
+
+    // Move the cursor to the end of the input field
+    setTimeout(() => {
+      inputRef.current.setSelectionRange(url.length, url.length);
+    }, 0);
+  };
+
   const handleChange = (e) => {
     let inputValue = e.target.value;
-    if (inputValue.startsWith("http://") || inputValue.startsWith("https://")) {
-      setUrl(inputValue);
-    } else {
-      setUrl("https://" + inputValue);
-    }
+    setUrl(inputValue);
   };
 
   return (
@@ -42,7 +55,9 @@ export default function Home() {
             placeholder="https://"
             pattern="https://.*"
             value={url}
+            ref={inputRef}
             onChange={handleChange}
+            onPaste={handlePaste} // Add paste event listener
             required
             className="p-3 border border-grey-40 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-turquoise-50 text-grey-100"
           />
