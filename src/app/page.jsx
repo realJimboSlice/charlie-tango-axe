@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("https://");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,9 +28,10 @@ export default function Home() {
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <label htmlFor="url" />
           <input
-            type="text"
+            type="url"
             id="url"
             placeholder="https://"
+            pattern="https://.*"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
