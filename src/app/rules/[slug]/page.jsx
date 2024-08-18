@@ -30,7 +30,7 @@ export default function RuleDetailPage({ params }) {
               href={rule.helpUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-turquoise-50 underline font-bold hover:text-brand-orange-70 transition-all duration-200"
+              className="underline font-bold hover:text-brand-orange-70 transition-all duration-200"
             >
               Further explanation on Deque University&apos;s website
             </a>
