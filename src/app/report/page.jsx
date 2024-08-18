@@ -83,7 +83,7 @@ function ReportContent() {
             </p>
             <p className="text-lg text-grey-80">
               Accessibility Rating:{" "}
-              <span className="font-bold text-cyan-600 text-7xl">{rating}</span>
+              <span className="font-bold text-7xl">{rating}</span>
             </p>
           </div>
         </div>
