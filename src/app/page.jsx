@@ -1,11 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
   const [url, setUrl] = useState("https://");
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,28 +24,26 @@ export default function Home() {
   };
 
   const handlePaste = (e) => {
-    e.preventDefault(); // Prevent the default paste behavior
+    e.preventDefault();
     const pasteText = e.clipboardData.getData("text");
 
     if (pasteText.startsWith("http://") || pasteText.startsWith("https://")) {
-      setUrl(pasteText); // Replace the entire value with the pasted URL
+      setUrl(pasteText);
     } else {
       setUrl("https://" + pasteText);
     }
 
-    // Move the cursor to the end of the input field
     setTimeout(() => {
       inputRef.current.setSelectionRange(url.length, url.length);
     }, 0);
   };
 
   const handleChange = (e) => {
-    let inputValue = e.target.value;
-    setUrl(inputValue);
+    setUrl(e.target.value);
   };
 
   return (
-    <section className="bg-brand-beige-10 h-screen flex flex-col justify-center items-center p-6 overflow-hidden">
+    <section className="bg-brand-beige-10 h-screen flex flex-col justify-center items-center p-6 overflow-hidden overscroll-none">
       <h1 className="text-4xl font-bold text-grey-80 text-center mb-4">
         Find out if a website is{" "}
         <span className="text-brand-turquoise-50">accessible</span> and{" "}
@@ -46,7 +52,7 @@ export default function Home() {
       <p className="text-lg text-grey-80 text-center mb-6">
         Enter a website URL to get started:
       </p>
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md overflow-hidden">
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <label htmlFor="url" />
           <input
