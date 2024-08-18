@@ -1,4 +1,4 @@
-"use client"; // Required for client-side hooks and handlers
+"use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,6 +11,15 @@ export default function Home() {
     if (url) {
       console.log("Navigating to:", `/report?url=${encodeURIComponent(url)}`);
       router.push(`/report?url=${encodeURIComponent(url)}`);
+    }
+  };
+
+  const handleChange = (e) => {
+    let inputValue = e.target.value;
+    if (inputValue.startsWith("http://") || inputValue.startsWith("https://")) {
+      setUrl(inputValue);
+    } else {
+      setUrl("https://" + inputValue);
     }
   };
 
@@ -33,7 +42,7 @@ export default function Home() {
             placeholder="https://"
             pattern="https://.*"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={handleChange}
             required
             className="p-3 border border-grey-40 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-turquoise-50 text-grey-100"
           />
