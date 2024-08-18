@@ -68,8 +68,11 @@ function ReportContent() {
               Report for <span className="text-cyan-600">{data.url}</span>
             </h1>
             <p className="text-lg text-grey-80">
-              Tested for {data.passes.length + data.violations.length} AXE
-              rules.
+              Tested for{" "}
+              <span className="font-bold">
+                {data.passes.length + data.violations.length}
+              </span>{" "}
+              AXE rules.
             </p>
             <p className="text-lg text-grey-80">
               Found{" "}
@@ -80,48 +83,83 @@ function ReportContent() {
             </p>
             <p className="text-lg text-grey-80">
               Accessibility Rating:{" "}
-              <span className="font-bold text-cyan-600">{rating}</span>
+              <span className="font-bold text-cyan-600 text-7xl">{rating}</span>
             </p>
           </div>
         </div>
-        <article className="mt-8">
+
+        <section className="mt-8">
           <h2 className="text-2xl font-bold text-grey-80 mb-4">Violations</h2>
-          <p className="text-grey-80 mb-4">Click on the rule to read more</p>
+          <p className="text-grey-80 mb-4">
+            Click on the &quot;Rule Id&quot; to read more
+          </p>
           <ul className="space-y-4">
             {data.violations.map((violation) => (
               <li
                 key={violation.id}
-                className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
+                className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4"
               >
-                <Link
-                  href={`/rules/${violation.id}`}
-                  key={violation.id}
-                  rel="noopener"
-                  target="_blank"
-                >
-                  {/* <li
-                    key={violation.id}
-                    className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
-                  > */}
+                <article>
                   <p className="text-grey-80">
                     Rule Id:{" "}
-                    <span className="underline font-bold group-hover:text-brand-turquoise-50">
-                      {violation.id}
-                    </span>
+                    <Link
+                      href={`/rules/${violation.id}`}
+                      key={violation.id}
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      <span className="underline font-bold ">
+                        {violation.id}
+                      </span>
+                    </Link>
                   </p>
                   <p className="text-grey-80">
                     Level of impact:{" "}
-                    <span className="font-bold">{violation.impact}</span>
+                    <span className="font-bold ">{violation.impact}</span>
                   </p>
                   <p className="text-grey-80">
-                    Description: <span>{violation.help}</span>
+                    Description:{" "}
+                    <span className="font-bold ">{violation.help}</span>
                   </p>
-                  {/* </li> */}
-                </Link>
+                  {/* <br /> */}
+                  <p className="font-bold text-xl text-grey-80 pt-2 pb-2">
+                    Details:
+                  </p>
+                  {violation.nodes.length > 0 && (
+                    <div>
+                      {violation.nodes.map((node, index) => (
+                        <div key={index} className="mb-4">
+                          {/* <p className="text-grey-80">
+                            <strong>Impact:</strong> {node.impact}
+                          </p> */}
+                          <p className="text-grey-80">
+                            <span>HTML:</span>{" "}
+                            <span className="font-bold ">
+                              <code>{node.html}</code>
+                            </span>
+                          </p>
+                          <p className="text-grey-80">
+                            Element Location:{" "}
+                            <span className="font-bold ">
+                              {node.target.join(", ")}
+                            </span>
+                          </p>
+                          <p className="text-grey-80">
+                            {/* To solve this problem you have to:{" "} */}
+                            <span className="font-bold ">
+                              {node.failureSummary}
+                            </span>
+                          </p>
+                          <p>-</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </article>
               </li>
             ))}
           </ul>
-        </article>
+        </section>
       </div>
     </main>
   );
@@ -129,7 +167,6 @@ function ReportContent() {
 
 export default function ReportPage() {
   return (
-    // Suspense shows a loading spinner while the data is being fetched
     <Suspense fallback={<LoadingSpin />}>
       <ReportContent />
     </Suspense>
