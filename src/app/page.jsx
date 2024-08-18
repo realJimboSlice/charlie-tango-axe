@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <section className="bg-brand-beige-10 h-screen flex flex-col justify-center items-center p-6 overflow-hidden overscroll-none">
+    <section className="bg-brand-beige-10 h-screen flex flex-col justify-center items-center p-2 overflow-hidden overscroll-none">
       <h1 className="text-4xl font-bold text-grey-80 text-center mb-4">
         Find out if a website is{" "}
         <span className="text-brand-turquoise-50">accessible</span> and{" "}
