@@ -12,14 +12,12 @@ export default function RulesPage() {
           {rules.map((rule) => (
             <li
               key={rule.id}
-              className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
+              className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4"
             >
               <Link href={`/rules/${rule.id}`} key={rule.id}>
                 <p className="text-grey-80">
                   Rule Id:{" "}
-                  <span className="group-hover:text-brand-turquoise-50 underline font-bold">
-                    {rule.id}
-                  </span>
+                  <span className=" underline font-bold">{rule.id}</span>
                 </p>
                 <p className="text-grey-80">
                   Description: <span>{rule.description}</span>

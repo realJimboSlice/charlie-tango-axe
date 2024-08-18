@@ -51,7 +51,7 @@ function ReportContent() {
   const rating = calculateRating(data.passes.length, data.violations.length);
 
   return (
-    <main className="bg-brand-beige-10 min-h-screen p-6">
+    <main className="bg-brand-beige-10 min-h-screen p-6 overflow-hidden overscroll-none">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="w-full md:w-1/2 flex-shrink-0">
