@@ -46,8 +46,8 @@ export default function Home() {
     <section className="bg-brand-beige-10 h-screen flex flex-col justify-center items-center p-2 overflow-hidden overscroll-none">
       <h1 className="text-4xl font-bold text-grey-80 text-center mb-4">
         Find out if a website is{" "}
-        <span className="text-brand-turquoise-50">accessible</span> and{" "}
-        <span className="text-brand-orange-70">compliant</span>!
+        <span className="text-cyan-600">accessible</span> and{" "}
+        <span className="text-orange-600">compliant</span>!
       </h1>
       <p className="text-lg text-grey-80 text-center mb-6">
         Enter a website URL to get started:

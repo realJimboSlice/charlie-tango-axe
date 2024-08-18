@@ -1,5 +1,3 @@
-// /components/fetchReportData.js
-
 const tags = ["wcag2a", "wcag2aa", "wcag2aaa", "best-practice", "ACT"];
 
 export function calculateRating(passes, violations) {

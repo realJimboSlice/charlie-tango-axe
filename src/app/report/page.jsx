@@ -65,8 +65,7 @@ function ReportContent() {
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-center">
             <h1 className="text-3xl font-bold text-grey-80 mb-2">
-              Report for{" "}
-              <span className="text-brand-turquoise-50">{data.url}</span>
+              Report for <span className="text-cyan-600">{data.url}</span>
             </h1>
             <p className="text-lg text-grey-80">
               Tested for {data.passes.length + data.violations.length} AXE
@@ -74,16 +73,14 @@ function ReportContent() {
             </p>
             <p className="text-lg text-grey-80">
               Found{" "}
-              <span className="font-bold text-brand-orange-70">
+              <span className="font-bold text-orange-600">
                 {data.violations.length}
               </span>{" "}
               issues.
             </p>
             <p className="text-lg text-grey-80">
               Accessibility Rating:{" "}
-              <span className="font-bold text-brand-turquoise-50">
-                {rating}
-              </span>
+              <span className="font-bold text-cyan-600">{rating}</span>
             </p>
           </div>
         </div>
@@ -92,14 +89,19 @@ function ReportContent() {
           <p className="text-grey-80 mb-4">Click on the rule to read more</p>
           <ul className="space-y-4">
             {data.violations.map((violation) => (
-              <Link href={`/rules/${violation.id}`} key={violation.id}>
+              <Link
+                href={`/rules/${violation.id}`}
+                key={violation.id}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 <li
                   key={violation.id}
                   className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200"
                 >
                   <p className="text-grey-80">
                     Rule Id:{" "}
-                    <span className="text-brand-turquoise-50 underline font-bold">
+                    <span className="text-cyan-600 underline font-bold">
                       {violation.id}
                     </span>
                   </p>
