@@ -89,19 +89,23 @@ function ReportContent() {
           <p className="text-grey-80 mb-4">Click on the rule to read more</p>
           <ul className="space-y-4">
             {data.violations.map((violation) => (
-              <Link
-                href={`/rules/${violation.id}`}
+              <li
                 key={violation.id}
-                rel="noopener noreferrer"
-                target="_blank"
+                className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
               >
-                <li
+                <Link
+                  href={`/rules/${violation.id}`}
                   key={violation.id}
-                  className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200"
+                  rel="noopener"
+                  target="_blank"
                 >
+                  {/* <li
+                    key={violation.id}
+                    className="bg-white border border-grey-40 rounded-lg p-4 shadow-sm mb-4 hover:bg-brand-orange-70 hover:border-brand-orange-70 hover:shadow-md transition-all duration-200 group"
+                  > */}
                   <p className="text-grey-80">
                     Rule Id:{" "}
-                    <span className="text-cyan-600 underline font-bold">
+                    <span className="underline font-bold group-hover:text-brand-turquoise-50">
                       {violation.id}
                     </span>
                   </p>
@@ -112,8 +116,9 @@ function ReportContent() {
                   <p className="text-grey-80">
                     Description: <span>{violation.help}</span>
                   </p>
-                </li>
-              </Link>
+                  {/* </li> */}
+                </Link>
+              </li>
             ))}
           </ul>
         </article>
